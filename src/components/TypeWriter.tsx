@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Fade from "@mui/material/Fade";
 
-import "./TypeWriter.css";
+import "./styles.css";
 
 const words = ["Data", "Software", "Operations", "Cloud"];
 

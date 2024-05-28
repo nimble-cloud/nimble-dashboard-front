@@ -1,34 +1,21 @@
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 
 import Toolbar from "./components/Toolbar";
 import nimbleLogo from "./assets/nimble_cloud_logo_original.webp";
-import TypeWriter from "./components/TypeWriter/TypeWriter";
+import TypeWriter from "./components/TypeWriter";
+import ProjectGrid from "./components/ProjectGrid";
+import Commendations from "./components/Commendations";
 
 function App() {
   return (
     <>
       <Toolbar />
-      <Grid container>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            textAlign: "center",
-            height: "91.5vh",
-          }}
-        >
-          <Box sx={{ mt: 5 }}>
-            <img src={nimbleLogo} alt="Nimble logo" height="300px" />
-            <TypeWriter />
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={6} sx={{ textAlign: "center" }}>
-          <Typography variant="body1">Who am i</Typography>
-        </Grid>
-      </Grid>
+      <Box sx={{ mt: "8%", mb: "10%", textAlign: "center" }}>
+        <img src={nimbleLogo} alt="Nimble logo" height="300px" />
+        <TypeWriter />
+      </Box>
+      <Commendations />
+      <ProjectGrid />
     </>
   );
 }

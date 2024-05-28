@@ -1,11 +1,10 @@
 import { createContext, useMemo, useState } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
 import {
   PaletteOptions,
   ThemeProvider,
   createTheme,
 } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 
 export const ThemeCtx = createContext({
   mode: "dark",
@@ -75,7 +74,7 @@ export default function ThemeCtxProvider({
     <ThemeCtx.Provider value={{ mode, toggleTheme }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box sx={{ width: "100%" }}>{children}</Box>
+        {children}
       </ThemeProvider>
     </ThemeCtx.Provider>
   );
