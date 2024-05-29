@@ -18,6 +18,9 @@ import Chat from "@mui/icons-material/Chat";
 import Close from "@mui/icons-material/Close";
 import Send from "@mui/icons-material/Send";
 
+// import { createRoot } from "react-dom/client";
+import Markdown from "react-markdown";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -57,6 +60,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     //     width: "500px",
     //   },
     // },
+  },
+}));
+
+const AnswerBox = styled(Box)(({ theme }) => ({
+  border: `1px solid ${theme.palette.primary.main}`,
+  borderRadius: "5px",
+  padding: 20,
+  marginTop: 5,
+  marginBottom: 20,
+  "& h6": {
+    fontWeight: 600,
+    color: theme.palette.secondary.main,
+    // marginBottom: 0,
+    // padding: 0,
   },
 }));
 
@@ -110,8 +127,10 @@ export default function Toolbar() {
   }, []);
 
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  // const [answer, setAnswer] = useState("");
   const [asking, setAsking] = useState(false);
+
+  const [list, setList] = useState<React.ReactElement[]>([]);
 
   const toggleDrawer = () => {
     if (open) return;
@@ -126,8 +145,21 @@ export default function Toolbar() {
     setAsking(true);
     const res = await fetch("http://localhost:8000/ask?q=" + question.trim());
     if (res.status === 200) {
-      const a = await res.text();
-      setAnswer(a);
+      const a = await res.json();
+
+      const c = (
+        <AnswerBox key={Math.random().toString()}>
+          <Typography variant="h6">{question}</Typography>
+          <Markdown>{a}</Markdown>
+        </AnswerBox>
+      );
+
+      setList((p) => {
+        const copy = [...p];
+        copy.unshift(c);
+        return copy;
+      });
+      setQuestion("");
     }
     setAsking(false);
   };
@@ -155,8 +187,17 @@ export default function Toolbar() {
             />
           </Search>
           <Drawer anchor="right" open={open}>
-            <Grid container sx={{ p: 2, width: "90vw" }}>
-              <Grid item xs={11} sx={{ display: "flex" }}>
+            <Grid container sx={{ p: 3, width: "90vw" }}>
+              {/* <Grid item xs={1} sx={{ textAlign: "center", pt: 1 }}>
+                <IconButton onClick={() => setOpen(false)} size="small">
+                  <Close sx={{ fontSize: "30px" }} />
+                </IconButton>
+              </Grid> */}
+
+              <Grid item xs={12} sx={{ display: "flex" }}>
+                <IconButton onClick={() => setOpen(false)} size="small">
+                  <Close sx={{ fontSize: "30px" }} />
+                </IconButton>
                 <TextField
                   type="search"
                   autoComplete="off"
@@ -172,7 +213,12 @@ export default function Toolbar() {
                   placeholder={placeholder}
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
-                  sx={{ mr: 2 }}
+                  onClick={() => {
+                    if (!question) {
+                      setQuestion(placeholder);
+                    }
+                  }}
+                  sx={{ mx: 2 }}
                 />
                 <Button
                   variant="contained"
@@ -185,23 +231,15 @@ export default function Toolbar() {
                   Send
                 </Button>
               </Grid>
-              <Grid item xs={1} sx={{ textAlign: "center", pt: 1 }}>
-                <IconButton onClick={() => setOpen(false)} size="small">
-                  <Close sx={{ fontSize: "30px" }} />
-                </IconButton>
-              </Grid>
 
               <Grid
                 item
                 xs={12}
                 sx={{
-                  p: 5,
-                  my: 5,
-                  border: "1px solid secondary.main",
-                  borderRadius: "5px",
+                  p: 3,
                 }}
               >
-                {asking ? (
+                {asking && (
                   <>
                     <Skeleton />
                     <Skeleton />
@@ -210,7 +248,9 @@ export default function Toolbar() {
                     <Skeleton />
                     <Skeleton />
                   </>
-                ) : (
+                )}
+                {list.map((i) => i)}
+                {/* : (
                   <Typography
                     variant="body1"
                     color="primary.main"
@@ -218,7 +258,7 @@ export default function Toolbar() {
                   >
                     {answer}
                   </Typography>
-                )}
+                )} */}
               </Grid>
             </Grid>
           </Drawer>
