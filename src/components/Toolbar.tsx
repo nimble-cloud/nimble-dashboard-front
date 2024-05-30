@@ -84,7 +84,6 @@ const suggestions = [
   howcan + "get me clean data and make it easy to access?",
   howcan + "automate our repetitive tasks and save time?",
   howcan + "integrate AI to enhance our decision-making processes?",
-  howcan + "improve our data security and compliance?",
   howcan + "streamline our data management with SQL?",
   howcan + "provide real-time analytics and insights?",
   howcan + "reduce our operational costs with modern tools?",
@@ -92,7 +91,6 @@ const suggestions = [
   howcan + "implement AI for better inventory management?",
   howcan + "optimize our workflow for better efficiency?",
   howcan + "migrate our legacy systems to the cloud?",
-  howcan + "simplify our IT infrastructure?",
   howcan + "improve our customer relationship management?",
   howcan + "provide scalable solutions for our growing business?",
   howcan + "help us leverage big data for strategic planning?",
@@ -127,7 +125,6 @@ export default function Toolbar() {
   }, []);
 
   const [question, setQuestion] = useState("");
-  // const [answer, setAnswer] = useState("");
   const [asking, setAsking] = useState(false);
 
   const [list, setList] = useState<React.ReactElement[]>([]);
