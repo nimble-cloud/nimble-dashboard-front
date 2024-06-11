@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import {
   PaletteOptions,
@@ -6,10 +6,7 @@ import {
   createTheme,
 } from "@mui/material/styles";
 
-export const ThemeCtx = createContext({
-  mode: "dark",
-  toggleTheme: () => {},
-});
+import { ThemeCtx } from "./context";
 
 const darkPalette: PaletteOptions = {
   mode: "dark",
@@ -28,7 +25,6 @@ const darkPalette: PaletteOptions = {
 const lightPalette: PaletteOptions = {
   mode: "light",
   background: {
-    // default: "#fafafa",
     paper: "#F6F7F8",
   },
   primary: {

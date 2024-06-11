@@ -14,21 +14,21 @@ export default function TypeWriter() {
     let int = 0; // Changed variable declaration for consistency
     let pos = 0; // Initialize position
 
-    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms)); // Helper function for delay
+    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-    // Function to handle the text animation
+    // function to handle the text animation
     async function animateText() {
-      // Clear the active text initially
+      // clear the active text initially
       setActiveText("");
 
       setTimeout(async () => {
-        // Loop through each character in the current word
+        // loop through each character in the current word
         for (const char of words[pos].split("")) {
           setActiveText((prev) => prev + char);
           await delay(100);
         }
 
-        // Move to the next word or stop if it's the last word
+        // move to the next word or stop if its the last word
         if (pos === words.length - 1) {
           clearInterval(int);
 
@@ -43,7 +43,7 @@ export default function TypeWriter() {
 
     animateText();
     setTimeout(() => {
-      // Start the interval to animate the text every 2 seconds
+      // start the interval to animate the text every 2 seconds
       int = setInterval(animateText, 3000);
     }, 500);
   }, []);

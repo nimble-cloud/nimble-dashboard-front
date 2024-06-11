@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Toolbar />
-      <Box sx={{ mt: "8%", mb: "10%", textAlign: "center" }}>
+      <Box sx={{ mt: "175px", mb: "10%", textAlign: "center" }}>
         <img src={nimbleLogo} alt="Nimble logo" height="300px" />
         <TypeWriter />
       </Box>

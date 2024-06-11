@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import AppBar from "@mui/material/AppBar";
 import TB from "@mui/material/Toolbar";
@@ -18,7 +19,6 @@ import Chat from "@mui/icons-material/Chat";
 import Close from "@mui/icons-material/Close";
 import Send from "@mui/icons-material/Send";
 
-// import { createRoot } from "react-dom/client";
 import Markdown from "react-markdown";
 
 const Search = styled("div")(({ theme }) => ({
@@ -95,9 +95,9 @@ const suggestions = [
   howcan + "provide scalable solutions for our growing business?",
   howcan + "help us leverage big data for strategic planning?",
   howcan + "ensure our data is always up-to-date and accurate?",
-  howcan + "make our business more agile and responsive?",
   howcan + "help us implement a data-driven culture?",
   howcan + "facilitate seamless integration with our existing software?",
+  howcan + "make our business more agile and responsive?",
 ];
 
 let int: number = 0;
@@ -114,7 +114,7 @@ export default function Toolbar() {
       setPlaceHolder(suggestions[pos]);
       pos++;
 
-      if (pos > suggestions.length) {
+      if (pos > suggestions.length - 1) {
         pos = 0;
       }
     }, 5000);
@@ -140,7 +140,9 @@ export default function Toolbar() {
 
   const ask = async () => {
     setAsking(true);
-    const res = await fetch("http://localhost:8000/ask?q=" + question.trim());
+    const res = await fetch(
+      "https://nimblecloud.app/dashai/ask?q=" + question.trim()
+    );
     if (res.status === 200) {
       const a = await res.json();
 
@@ -161,6 +163,7 @@ export default function Toolbar() {
     setAsking(false);
   };
 
+  const isPhone = useMediaQuery("(max-width:1024px)");
   return (
     <>
       <AppBar position="fixed">
@@ -184,22 +187,33 @@ export default function Toolbar() {
             />
           </Search>
           <Drawer anchor="right" open={open}>
-            <Grid container sx={{ p: 3, width: "90vw" }}>
-              {/* <Grid item xs={1} sx={{ textAlign: "center", pt: 1 }}>
+            <Grid
+              container
+              sx={{
+                width: isPhone ? "100vw" : "90vw",
+                my: 2,
+                alignItems: "center",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                md={11}
+                sx={{ display: "flex", mb: isPhone ? 2 : 0, px: 1 }}
+              >
                 <IconButton onClick={() => setOpen(false)} size="small">
-                  <Close sx={{ fontSize: "30px" }} />
-                </IconButton>
-              </Grid> */}
-
-              <Grid item xs={12} sx={{ display: "flex" }}>
-                <IconButton onClick={() => setOpen(false)} size="small">
-                  <Close sx={{ fontSize: "30px" }} />
+                  <Close
+                    sx={{
+                      fontSize: "30px",
+                    }}
+                  />
                 </IconButton>
                 <TextField
                   type="search"
                   autoComplete="off"
                   fullWidth
                   label="Nimble Chat"
+                  multiline={isPhone}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -215,17 +229,19 @@ export default function Toolbar() {
                       setQuestion(placeholder);
                     }
                   }}
-                  sx={{ mx: 2 }}
                 />
+              </Grid>
+              <Grid item xs={12} md={1} sx={{ px: isPhone ? 2 : 1 }}>
                 <Button
                   variant="contained"
                   color="primary"
                   aria-label="directions"
                   onClick={ask}
                   disabled={question === ""}
+                  fullWidth
+                  sx={{ height: "56px" }}
                 >
-                  <Send sx={{ mr: 2 }} />
-                  Send
+                  Send <Send />
                 </Button>
               </Grid>
 
@@ -247,15 +263,6 @@ export default function Toolbar() {
                   </>
                 )}
                 {list.map((i) => i)}
-                {/* : (
-                  <Typography
-                    variant="body1"
-                    color="primary.main"
-                    sx={{ fontWeight: 600 }}
-                  >
-                    {answer}
-                  </Typography>
-                )} */}
               </Grid>
             </Grid>
           </Drawer>
