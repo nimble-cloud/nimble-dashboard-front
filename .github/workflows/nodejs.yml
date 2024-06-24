@@ -26,6 +26,4 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
         # env:
-# /home/administrator/server/apps/nginx/html/nimble/dashboard
-#   - run: rm -r ~/server/apps/nginx/html/nimble/dashboard/* && mv ~/server/apps/nginx/html/actions-runner/_work/thrive_front/thrive_front/dist/* ~/server/apps/nginx/html/thrive/
-# working-directory: ./thrive
+      - run: rm -r ~/server/apps/nginx/html/nimble/dashboard/* && mv ~/server/apps/actions-runner/_work/nimble-dashboard-front/nimble-dashboard-front/dist/* ~/server/apps/nginx/html/nimble/dashboard/
