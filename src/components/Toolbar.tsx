@@ -141,10 +141,18 @@ export default function Toolbar() {
   const ask = async () => {
     setAsking(true);
     const res = await fetch(
-      "https://nimblecloud.app/dashai/ask?q=" + question.trim()
+      // "https://nimblecloud.app/dashai/ask?q=" + question.trim()
+      "https://dashboard-api.nimblecloud.app/api/v1/chat",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question: question.trim() }),
+      }
     );
     if (res.status === 200) {
-      const a = await res.json();
+      const a = await res.text();
 
       const c = (
         <AnswerBox key={Math.random().toString()}>
