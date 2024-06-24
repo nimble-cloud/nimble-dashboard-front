@@ -21,6 +21,8 @@ import Send from "@mui/icons-material/Send";
 
 import Markdown from "react-markdown";
 
+import axios from "axios";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -140,24 +142,28 @@ export default function Toolbar() {
 
   const ask = async () => {
     setAsking(true);
-    const res = await fetch(
-      // "https://nimblecloud.app/dashai/ask?q=" + question.trim()
+    // const res = await fetch(
+    //   // "https://nimblecloud.app/dashai/ask?q=" + question.trim()
+    //   "https://dashboard-api.nimblecloud.app/api/v1/chat",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ question: question.trim() }),
+    //   }
+    // );
+    const { status, data } = await axios.post(
       "https://dashboard-api.nimblecloud.app/api/v1/chat",
       {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question: question.trim() }),
+        question: question.trim(),
       }
     );
-    if (res.status === 200) {
-      const a = await res.text();
-
+    if (status === 200) {
       const c = (
         <AnswerBox key={Math.random().toString()}>
           <Typography variant="h6">{question}</Typography>
-          <Markdown>{a}</Markdown>
+          <Markdown>{data}</Markdown>
         </AnswerBox>
       );
 
