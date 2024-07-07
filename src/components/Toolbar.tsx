@@ -187,7 +187,7 @@ export default function Toolbar() {
               About Us
             </Typography>
             <Typography variant="h6" noWrap>
-              Contact
+              Contacts
             </Typography>
           </Box>
           <Search>
