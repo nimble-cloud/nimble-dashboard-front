@@ -14,12 +14,15 @@ const darkPalette: PaletteOptions = {
     default: "#2a303c",
     paper: "#1c212b",
   },
-  // primary: {
-  //   main: "#1F466F",
-  // },
-  // secondary: {
-  //   main: "#6C9A62",
-  // },
+  primary: {
+    main: "#349486",
+  },
+  secondary: {
+    main: "#e9c694",
+  },
+  info: {
+    main: "#1b181c",
+  },
 };
 
 const lightPalette: PaletteOptions = {

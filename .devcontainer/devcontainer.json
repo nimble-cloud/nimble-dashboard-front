@@ -1,0 +1,6 @@
+{
+  "name": "Dashboard Front",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "dev_dash_front",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
+}

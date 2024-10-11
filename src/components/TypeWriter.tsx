@@ -1,24 +1,22 @@
-import { useState, useEffect } from "react";
+import { memo, useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Fade from "@mui/material/Fade";
 
 import "./styles.css";
 
-const words = ["Data", "Software", "Operations", "Cloud"];
+const words = ["Data", "Software", "Operations", "AI", "Cloud"];
 
-export default function TypeWriter() {
+const TypeWriter = memo(() => {
   const [activeText, setActiveText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
-    let int = 0; // Changed variable declaration for consistency
-    let pos = 0; // Initialize position
+    let int = 0;
+    let pos = 0;
 
     const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-    // function to handle the text animation
     async function animateText() {
-      // clear the active text initially
       setActiveText("");
 
       setTimeout(async () => {
@@ -38,13 +36,12 @@ export default function TypeWriter() {
         } else {
           pos++;
         }
-      }, 300);
+      }, 400);
     }
 
     animateText();
     setTimeout(() => {
-      // start the interval to animate the text every 2 seconds
-      int = setInterval(animateText, 3000);
+      int = setInterval(animateText, 2000);
     }, 500);
   }, []);
 
@@ -55,10 +52,12 @@ export default function TypeWriter() {
         {showCursor && <span className="blinking">|</span>}
       </Typography>
       <Fade in={!showCursor}>
-        <Typography variant="h6" color="info.main">
-          Data - Software - Operations
+        <Typography variant="h6" color="">
+          {words.join(" - ")}
         </Typography>
       </Fade>
     </>
   );
-}
+});
+
+export default TypeWriter;
