@@ -50,9 +50,7 @@ const TypeWriter = memo(() => {
     }
 
     writer()
-
   }, []);
-
 
   return (
     <>
