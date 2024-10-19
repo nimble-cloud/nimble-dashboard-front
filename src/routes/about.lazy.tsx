@@ -16,8 +16,13 @@ export const Route = createLazyFileRoute('/about')({
 function About() {
   return (
     <Container>
-      <Typography sx={{ mt: 5, mb: 3 }}>
-        Sawyer and Jake met at PASCO Home Health. Sawyer is a full stack software developer. He specializes in making applications that facilitate productivity. Jake is a data engineer who can get insights out of a data set with five thousand records or one billion records. Together they specialize in taking obscure problems companies face and creating easy to use - data focused solutions. <b>Nimble Cloud</b> was created to be an outlet for these skills. We specialize in operational processes driven by data. We understand that problems change quickly so the solution must be nimble.
+      <Typography sx={{
+        mt: 5, mb: 3, "& a": {
+          textDecoration: "none",
+          color: "grey",
+        }
+      }}>
+        Sawyer and Jake met at <a target="_blank" href="https://pascohh.com">PASCO Home Health</a>. Sawyer is a full stack software developer. He specializes in making applications that facilitate productivity. Jake is a data engineer who can get insights out of a data set with five thousand records or one billion records. Together they specialize in taking obscure problems companies face and creating easy to use - data focused solutions. <b>Nimble Cloud</b> was created to be an outlet for these skills. We specialize in operational processes driven by data. We understand that problems change quickly so the solution must be nimble.
       </Typography>
 
       <Stack direction={{ sm: "column", md: "row" }} spacing={2}>

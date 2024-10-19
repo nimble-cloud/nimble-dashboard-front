@@ -35,13 +35,13 @@ function CardItem({
         height: "250px",
       }}
     >
-      <CardActionArea href={href} target="_blank">
+      <CardActionArea href={href} target="_blank" sx={{ height: "100%" }}>
         <CardHeader
           avatar={companyImage}
           title={companyName}
           subheader={subHeader}
         />
-        <CardContent sx={{ overflowY: "auto", height: "175px", pb: 2, mt: -2 }}>
+        <CardContent sx={{ overflowY: "auto", height: "180px", pb: 2, mt: -3 }}>
           <Typography variant="body2" color="text.secondary">
             {commendation}
           </Typography>
@@ -81,6 +81,19 @@ export default function Commendations() {
         commendation="Jake is one of the finest professionals I had the privilege to work with in my career. From the beginning, he showed great initiative and innovative critical thinking."
         companyImage={<Avatar />}
         href=""
+      />
+      <CardItem
+        companyName="Chris"
+        subHeader="Director of Operations & Technology, PASCO"
+        commendation="Under pressure, Sawyer's creative problem-solving abilities shine. He consistently approaches
+challenges with an innovative mindset, offering solutions that others have not have considered. His
+resilience is unparalleled, and I have never seen him encounter a problem he couldn't solve. The highest professional compliment I can offer is to say that I would choose someone for my team, and,
+though I was lucky enough to inherit him on my team, Sawyer is still unquestionably one of those people.
+I wholeheartedly recommend him for any role or challenge that he is given. His work ethic, skills, and
+positive impact on the team make him an invaluable asset to any organization. I am confident that he will
+bring the same level of excellence and dedication to your team that he has demonstrated at PASCO."
+        companyImage={<Avatar />}
+        href="https://www.linkedin.com/in/cmlaney"
       />
     </Marquee>
   );
