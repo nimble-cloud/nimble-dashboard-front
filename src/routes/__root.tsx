@@ -9,7 +9,7 @@ export const Route = createRootRoute({
         <>
             <Toolbar />
 
-            <Box sx={{ mt: 3, p: 1 }}>
+            <Box sx={{ mt: "60px", p: 1 }}>
                 <Outlet />
             </Box>
         </>

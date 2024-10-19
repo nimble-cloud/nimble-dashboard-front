@@ -5,6 +5,7 @@ import Fade from "@mui/material/Fade";
 
 import "./styles.css";
 
+const sleep = (ms: number) => new Promise((res) => setTimeout(() => res(""), ms))
 const words = ["Data", "Software", "Operations", "AI", "Cloud"];
 
 const TypeWriter = memo(() => {
@@ -12,39 +13,46 @@ const TypeWriter = memo(() => {
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
-    let int = 0;
-    let pos = 0;
 
-    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
-    async function animateText() {
-      setActiveText("");
-
-      setTimeout(async () => {
-        // loop through each character in the current word
-        for (const char of words[pos].split("")) {
-          setActiveText((prev) => prev + char);
-          await delay(100);
-        }
-
-        // move to the next word or stop if its the last word
-        if (pos === words.length - 1) {
-          clearInterval(int);
-
-          setTimeout(() => {
-            setShowCursor(false);
-          }, 1000);
-        } else {
-          pos++;
-        }
-      }, 400);
+    async function writeWord(word: string) {
+      for await (const char of word.split("")) {
+        setActiveText((prev) => prev + char);
+        await sleep(200)
+      }
     }
 
-    animateText();
-    setTimeout(() => {
-      int = setInterval(animateText, 2000);
-    }, 500);
+    async function deleteWord(word: string) {
+      const letters = word.split("")
+      let count = letters.length - 1;
+      letters[count] = ""
+
+      for await (const c of letters) {
+        c;
+
+        setActiveText(letters.join(""))
+        count--;
+        letters[count] = ""
+
+        await sleep(125)
+      }
+    }
+
+    async function writer() {
+      for await (const word of words) {
+        await writeWord(word)
+        await sleep(2000)
+        if (word !== "Cloud") {
+          await deleteWord(word)
+        }
+      }
+
+      setShowCursor(false)
+    }
+
+    writer()
+
   }, []);
+
 
   return (
     <>

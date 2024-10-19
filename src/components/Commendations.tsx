@@ -32,7 +32,7 @@ function CardItem({
       sx={{
         width: "450px",
         marginRight: "30px",
-        height: "200px",
+        height: "250px",
       }}
     >
       <CardActionArea href={href} target="_blank">
@@ -41,7 +41,7 @@ function CardItem({
           title={companyName}
           subheader={subHeader}
         />
-        <CardContent sx={{ overflowY: "auto", height: "125px", pb: 2 }}>
+        <CardContent sx={{ overflowY: "auto", height: "175px", pb: 2, mt: -2 }}>
           <Typography variant="body2" color="text.secondary">
             {commendation}
           </Typography>
@@ -57,7 +57,7 @@ export default function Commendations() {
       <CardItem
         companyName="Schextech IT Services"
         subHeader="Hugh - Owner"
-        commendation="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique ipsum veritatis laboriosam reiciendis officia labore corrupti rerum voluptatibus quia natus sit quidem iure modi, iste nobis eveniet temporibus molestiae amet."
+        commendation="Sawyer is an exceptional engineer with a remarkable ability to solve complex problems. He consistently transforms basic ideas into comprehensive applications, often addressing challenges the client hadn't even anticipated. I highly recommend Sawyer as a full-stack developer, as he possesses a deep understanding of both technical development and diverse business processes."
         href="https://schextech.net"
         companyImage={<img src={Shex} height="50px" />}
       />

@@ -24,7 +24,9 @@ const Toolbar = () => {
     <AppBar position="fixed">
       <TB>
         <Box sx={{
-          flexGrow: 1, display: { xs: "none", md: "flex" }, "& a": {
+          flexGrow: 1,
+          alignItems: "center",
+          display: { xs: "none", md: "flex" }, "& a": {
             textDecoration: "none",
             color: "unset",
           },
@@ -34,19 +36,19 @@ const Toolbar = () => {
           </Link>
           <Link to="/about">
             {({ isActive }) => (
-              <Typography variant="h6" color={isActive ? "secondary.main" : "inherit"} noWrap sx={{ mr: 3 }}>
+              <Typography variant="h6" color={isActive ? "secondary.main" : "inherit"} sx={{ mr: 3 }}>
                 About Us
               </Typography>
             )}
           </Link>
           <Link to="/hire-sawyer">
             {({ isActive }) => (
-              <Typography variant="h6" noWrap color={isActive ? "secondary.main" : "inherit"}>
+              <Typography variant="h6" color={isActive ? "secondary.main" : "inherit"}>
                 Hire Sawyer
               </Typography>
             )}
           </Link>
-          <IconButton onClick={t.toggleTheme} sx={{ mt: -0.5, ml: 1 }}>
+          <IconButton onClick={t.toggleTheme} sx={{ ml: 1 }}>
             {t.mode === "light" ? <DarkMode /> : <LightMode />}
           </IconButton>
         </Box>

@@ -138,6 +138,7 @@ const DrawerContent = memo(
             autoComplete="off"
             fullWidth
             label="Nimble Chat"
+            placeholder="Click the chat icon for inspiration or ask a question about Nimble Cloud."
             multiline={isPhone}
             InputProps={{
               startAdornment: (
